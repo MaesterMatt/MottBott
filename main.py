@@ -59,10 +59,8 @@ async def on_message(message):
 #Public Welcome
 @client.event
 async def on_member_join(member):
-    #welcome(member)
-    #welcome(member)
     marc_welcome = "https://media.discordapp.net/attachments/495284966876512258/829984477727424512/ezgif.com-video-to-gif-2.gif"
-    mylist = ["**Welcome to Spirit!** We're excited to see you ", "**Welcome to Spirit** BINCH... Enjoy your stay ", "**SSSUUUUUUUHHHHHHHHHHHHH** "]
+    mylist = ["**Welcome to Spirit!** We're excited to see you ", "**Welcome to Spirit** BINCH... Enjoy your stay ", "**SSSUUUUUUUHHHHHHHHHHHHH** ", "SHEEEEEEEEEEEEEEEEEEEEEEEEEESH ", "Welcome to spirit fuk u, ok have fun ... fuk, u ok? "]
     rand_quote = mylist[random.randint(0, len(mylist)-1)]
     newUserDMMessage = rand_quote + member.name + "!\n"
     self_add_roles = client.get_channel(717216767222480896)
