@@ -5,7 +5,6 @@ import time
 import random
 import asyncio
 import logging
-from welcome import *
 
 #client = discord.Client()
 
