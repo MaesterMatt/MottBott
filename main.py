@@ -52,6 +52,11 @@ async def on_message(message):
       
       await message.channel.send('sux' if hau else 'doesn\'t sux')
 
+    mylist = ["jc...........", "JCJCJCJCJCJCJCJC", ".................JC!", "down >:)", "Oh sorry I'm busy", "Run without me :(", "I'm out right now", "How about in like an hour?"]
+    if 'jc' in message.content.lower():
+      rand_quote = mylist[random.randint(0, len(mylist)-1)]
+      await message.channel.send(rand_quote)
+
 #Public Welcome
 @client.event
 async def on_member_join(member):
