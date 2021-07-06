@@ -5,7 +5,6 @@ import time
 import random
 import asyncio
 import logging
-from welcome import *
 
 #client = discord.Client()
 
@@ -22,6 +21,9 @@ juwi_last = time.time()-60
 async def on_message(message):      
     if message.author == client.user:
         return
+
+    if client.user.mentioned_in(message):
+        await message.channel.send('Hey Daddy ~')
 
     #darren nauseous react
     if 'darren' in message.content.lower():
@@ -51,7 +53,7 @@ async def on_message(message):
       hau = bool(random.getrandbits(1))
       await message.channel.send('sux' if hau else 'doesn\'t sux')
 
-    mylist = ["jc...........", "JCJCJCJCJCJCJCJC", ".................JC!", "down >:)", "Oh sorry I'm busy", "Run without me :(", "I'm out right now", "How about in like an hour?"]
+    mylist = ["jc...........", "JCJCJCJCJCJCJCJC", ".................JC!", "down >:)", "Oh sorry I'm busy", "Run without me :(", "I'm out right now", "How about in like an hour?", "Im going to dentist ...", "I WNA NAP", "I’m at hospital", ]
     if 'jc' in message.content.lower():
       rand_quote = mylist[random.randint(0, len(mylist)-1)]
       await message.channel.send(rand_quote)
