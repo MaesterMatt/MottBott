@@ -53,7 +53,7 @@ async def on_message(message):
       hau = bool(random.getrandbits(1))
       await message.channel.send('sux' if hau else 'doesn\'t sux')
 
-    mylist = ["jc...........", "JCJCJCJCJCJCJCJC", ".................JC!", "down >:)", "Oh sorry I'm busy", "Run without me :(", "I'm out right now", "How about in like an hour?", "Im going to dentist ...", "I WNA NAP", "I’m at hospital", ]
+    mylist = ["jc...........", "JCJCJCJCJCJCJCJC", ".................JC!", "down >:)", "Oh sorry I'm busy", "Run without me :(", "I'm out right now", "How about in like an hour?", "Im going to dentist ...", "I WNA NAP", "I’m at hospital"]
     if 'jc' in message.content.lower():
       rand_quote = mylist[random.randint(0, len(mylist)-1)]
       await message.channel.send(rand_quote)
