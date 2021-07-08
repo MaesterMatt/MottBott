@@ -58,10 +58,14 @@ async def on_message(message):
       rand_quote = mylist[random.randint(0, len(mylist)-1)]
       await message.channel.send(rand_quote)
 
+    if 'jiaoceng' in message.content.lower():
+      #bernie = "https://i.imgur.com/OAWkEbe.png"
+      await message.channel.send(file=discord.File('Jiaoceng.png'))
+
+
 #Public Welcome
 @client.event
 async def on_member_join(member):
-    marc_welcome = "https://media.discordapp.net/attachments/495284966876512258/829984477727424512/ezgif.com-video-to-gif-2.gif"
     mylist = ["**Welcome to Spirit!** We're excited to see you ", "**Welcome to Spirit** BINCH... Enjoy your stay ", "**SSSUUUUUUUHHHHHHHHHHHHH** ", "SHEEEEEEEEEEEEEEEEEEEEEEEEEESH ", "Welcome to spirit fuk u, ok have fun ... fuk, u ok? "]
     rand_quote = mylist[random.randint(0, len(mylist)-1)]
     newUserDMMessage = rand_quote + member.name + "!\n"
