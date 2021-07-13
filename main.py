@@ -55,15 +55,17 @@ async def on_message(message):
 
     mylist = ["JCJCJCJCJCJCJCJC", ".................JC!", "down >:)", "Oh sorry I'm busy", "Run without me :(", "I'm out right now", "How about in like an hour?", "Im going to dentist ...", "I WNA NAP", "I’m at hospital", "IM GETTING THE BEE OUT STILL", "It's too late for JC now, imma go to zak", "LMAO WTF IS THIS SHIT im going out ....", "LOL", "gimme like 15 mins me finishign dinner"]
     if 'jc' in message.content.lower():
-      rand_quote = mylist[random.randint(0, len(mylist)-1)]
-      await message.channel.send(rand_quote)
+      if 'so no jc?' in message.content.lower():
+        await message.channel.send(file=discord.File('nojc.png'))
+      else:
+        rand_quote = mylist[random.randint(0, len(mylist)-1)]
+        await message.channel.send(rand_quote)
 
     if 'jiaoceng' in message.content.lower():
       #bernie = "https://i.imgur.com/OAWkEbe.png"
       await message.channel.send(file=discord.File('Jiaoceng.png'))
 
-    if 'so no jc?' in message.content.lower():
-      await message.channel.send(file=discord.File('nojc.png'))
+    
 
 
 #Public Welcome
