@@ -90,7 +90,7 @@ async def on_message(message):
 #Public Welcome
 @client.event
 async def on_member_join(member):
-    mylist = ["**Welcome to Spirit!** We're excited to see you ", "**Welcome to Spirit** BINCH... Enjoy your stay ", "**SSSUUUUUUUHHHHHHHHHHHHH** ", "SHEEEEEEEEEEEEEEEEEEEEEEEEEESH ", "Welcome to spirit fuk u, ok have fun ... fuk, u ok? "]
+    mylist = ["**Welcome to Spirit!** We're excited to see you ", "**Welcome to Spirit** BINCH... Enjoy your stay ", "**SSSUUUUUUUHHHHHHHHHHHHH** ", "SHEEEEEEEEEEEEEEEEEEEEEEEEEESH ", "Welcome to spirit! I'm ugly "]
     rand_quote = mylist[random.randint(0, len(mylist)-1)]
     newUserDMMessage = rand_quote + member.name + "!\n"
     self_add_roles = client.get_channel(717216767222480896)
