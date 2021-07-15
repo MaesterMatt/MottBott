@@ -17,6 +17,7 @@ async def on_ready():
     print('We have logged in as {0.user}'.format(client))
 
 juwi_last = time.time()-60
+lauren_last = time.time()-60
 @client.event
 async def on_message(message):      
     if message.author == client.user:
@@ -47,6 +48,16 @@ async def on_message(message):
         emoji = '\U0001F1F8'
         await message.add_reaction(emoji)
         juwi_last = time.time()
+
+    global lauren_last
+    if str(message.author) == "Lauren#2084" and (time.time()-lauren_last > 60):
+        emoji = '\U0001F1ED'
+        await message.add_reaction(emoji)
+        emoji = '\U0001F1E7'
+        await message.add_reaction(emoji)
+        emoji = '\U0001F1E9'
+        await message.add_reaction(emoji)
+        lauren_last = time.time()
 
     #Hau sux
     if 'hau' in message.content.lower():
