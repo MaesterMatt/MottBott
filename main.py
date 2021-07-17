@@ -77,13 +77,10 @@ async def on_message(message):
       await message.channel.send(file=discord.File('Jiaoceng.png'))
 
     if 'eggjung' in message.content.lower():
-      #bernie = "https://i.imgur.com/OAWkEbe.png"
-      sujung = bool(random.getrandbits(1))
-      if sujung:
-        await message.channel.send(file=discord.File('eggjung.jpg'))
-      else: 
-        await message.channel.send(file=discord.File('eggjung1.jpg'))
-
+      eggjungImageCount = len(os.listdir('eggjung/'))
+      sujung = random.randint(0, eggjungImageCount-1)
+      suwu = 'eggjung/eggjung' + str(sujung) + '.jpg'
+      await message.channel.send(file=discord.File(suwu))
     
 
 
