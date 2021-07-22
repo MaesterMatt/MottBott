@@ -64,7 +64,7 @@ async def on_message(message):
       hau = bool(random.getrandbits(1))
       await message.channel.send('sux' if hau else 'doesn\'t sux')
 
-    mylist = ["JCJCJCJCJCJCJCJC", ".................JC!", "down >:)", "Oh sorry I'm busy", "Run without me :(", "I'm out right now", "How about in like an hour?", "Im going to dentist ...", "I WNA NAP", "I’m at hospital", "IM GETTING THE BEE OUT STILL", "It's too late for JC now, imma go to zak", "LMAO WTF IS THIS SHIT im going out ....", "LOL", "gimme like 15 mins me finishign dinner"]
+    mylist = ["JCJCJCJCJCJCJCJC", ".................JC!", "down >:)", "Oh sorry I'm busy", "just go w/o me idk wtf is wrong with this game", "I'm out right now", "How about in like an hour?", "Im going to dentist ...", "I WNA NAP", "I’m at hospital", "IM GETTING THE BEE OUT STILL", "It's too late for JC now, imma go to zak", "LMAO WTF IS THIS SHIT im going out ....", "LOL", "gimme like 15 mins me finishign dinner", "omg it says we are unable to connect to maplelegends"]
     if 'jc' in message.content.lower():
       if 'no jc' in message.content.lower():
         await message.channel.send(file=discord.File('nojc.png'))
@@ -95,6 +95,11 @@ async def on_member_join(member):
     newUserDMMessage2 = 'Please check out the roles in {0.mention}'.format(self_add_roles)
     
     print("Recognized that " + member.name + " joined")
+
+    introduce_self = client.get_channel(865854495760973834)
+    Text2Send = 'Hello! Welcome to Spirit!\nBefore letting you into the bathhouse, please copy and fill out this template and post it in {0.mention}\n\nName: \n IGN: \n Birthday: \n '.format(introduce_self)
+    channel = await member.create_dm()
+    await channel.send(Text2Send)
   
     role = discord.utils.get(member.guild.roles, id=727473839268691968)
     await member.add_roles(role)
