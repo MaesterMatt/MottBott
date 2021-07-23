@@ -100,7 +100,7 @@ async def on_message(message):
           ign = message.content[intromsg.find("IGN")+4:intromsg.find("\n", intromsg.find("IGN")+4)].strip(" \n")
           print("IGN: " + ign)
 
-          if len(name) and len(ign):
+          if len(name) and len(ign) and len(name) + len(ign) < 29:
             nickname = name + " | " + ign
             await message.author.edit(nick=nickname)
 
