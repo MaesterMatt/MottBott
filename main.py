@@ -117,7 +117,7 @@ async def on_message(message):
             await general.send(file=discord.File('marc.gif'))
             await general.send(newUserDMMessage)
           else:
-            errorDM = "Hi, please give us your name and IGN(In Game Name)\n"
+            errorDM = "Hi, please give us your name and IGN(In Game Name)\n*Must be fewer than 28 characters total*\n"
             await message.delete()
             channel = await message.author.create_dm()
             await channel.send(errorDM)
