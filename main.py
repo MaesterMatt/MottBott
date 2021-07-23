@@ -82,6 +82,13 @@ async def on_message(message):
       suwu = 'eggjung/eggjung' + str(sujung) + '.jpg'
       await message.channel.send(file=discord.File(suwu))
 
+    if '?mystery' in message.content.lower():
+      with open('icebreakers.txt') as fr: 
+        lines = fr.readlines() 
+        icebreaker = random.choice(lines) if lines else None 
+        channel = await message.author.create_dm()
+        await channel.send("Your Mystery question is: \n*" + icebreaker.strip("\n") + "*\n")
+
     #The unknown spirit messaged in the welcome channel
     if message.channel == client.get_channel(865854495760973834):
       ghost_role = discord.utils.get(message.author.guild.roles, id=868056296534999080)
