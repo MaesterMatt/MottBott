@@ -82,26 +82,38 @@ async def on_message(message):
       suwu = 'eggjung/eggjung' + str(sujung) + '.jpg'
       await message.channel.send(file=discord.File(suwu))
 
-    print()
     #The unknown spirit messaged in the welcome channel
     if message.channel == client.get_channel(865854495760973834):
       ghost_role = discord.utils.get(message.author.guild.roles, id=868056296534999080)
       if message.author.top_role == ghost_role:
         intromsg = message.content
         if intromsg.find("Name") > 0 and intromsg.find("IGN") > 0 and intromsg.find("Birthday") > 0 and intromsg.find("Mystery") > 0:
-          await message.author.remove_roles(ghost_role)
-          general = client.get_channel(495284966876512258)
+          name = message.content[intromsg.find("Name")+5:intromsg.find("\n", intromsg.find("Name")+5)].strip(" \n")
+          print("Name: " + name)
+          ign = message.content[intromsg.find("IGN")+4:intromsg.find("\n", intromsg.find("IGN")+4)].strip(" \n")
+          print("IGN: " + ign)
 
-          spies_role = discord.utils.get(message.author.guild.roles, id=727473839268691968)
-          await message.author.add_roles(spies_role)
-          mylist = ["**Welcome to Spirit!** We're excited to see you ", "**Welcome to Spirit** BINCH... Enjoy your stay ", "**SSSUUUUUUUHHHHHHHHHHHHH** ", "SHEEEEEEEEEEEEEEEEEEEEEEEEEESH ", "Welcome to spirit! I'm ugly "]
-          rand_quote = mylist[random.randint(0, len(mylist)-1)]
-          self_add_roles = client.get_channel(717216767222480896)
-          newUserDMMessage = rand_quote + "{0.mention}!\nPlease check out the roles in {1.mention}".format(message.author, self_add_roles)
-        
-          #newUserDMMessage2 = 'Please check out the roles in {1.mention}'.format()
-          await general.send(file=discord.File('marc.gif'))
-          await general.send(newUserDMMessage)
+          if len(name) and len(ign):
+            nickname = name + " | " + ign
+            await message.author.edit(nick=nickname)
+
+            await message.author.remove_roles(ghost_role)
+            general = client.get_channel(495284966876512258)
+            spies_role = discord.utils.get(message.author.guild.roles, id=727473839268691968)
+            await message.author.add_roles(spies_role)
+            mylist = ["**Welcome to Spirit!** We're excited to see you ", "**Welcome to Spirit** BINCH... Enjoy your stay ", "**SSSUUUUUUUHHHHHHHHHHHHH** ", "SHEEEEEEEEEEEEEEEEEEEEEEEEEESH ", "Welcome to spirit! I'm ugly "]
+            rand_quote = mylist[random.randint(0, len(mylist)-1)]
+            self_add_roles = client.get_channel(717216767222480896)
+            newUserDMMessage = rand_quote + "{0.mention}!\nPlease check out the roles in {1.mention}".format(message.author, self_add_roles)
+          
+            #newUserDMMessage2 = 'Please check out the roles in {1.mention}'.format()
+            await general.send(file=discord.File('marc.gif'))
+            await general.send(newUserDMMessage)
+          else:
+            errorDM = "Hi, please give us your name and IGN(In Game Name)\n"
+            await message.delete()
+            channel = await message.author.create_dm()
+            await channel.send(errorDM)
         else:
           errorDM = "Hi, it seems like you need to copy the following template exactly:\n"
           errorDM2 = "-------------------------\nName: \nIGN: \nBirthday: \nMystery:\n-------------------------"
@@ -109,9 +121,6 @@ async def on_message(message):
           channel = await message.author.create_dm()
           await channel.send(errorDM)
           await channel.send(errorDM2)
-
-      #await general.send(newUserDMMessage2)
-
 
 #Public Welcome
 @client.event
@@ -121,9 +130,13 @@ async def on_member_join(member):
     with open('icebreakers.txt') as fr: 
         lines = fr.readlines() 
         icebreaker = random.choice(lines) if lines else None 
-    Text2Send = '**Hello and Welcome to Spirit!**\nBefore letting you into the bathhouse, please copy and fill out this template below and post it in {0.mention}\n\nName: \nIGN: \nBirthday: \nMystery*: \n\n*For the mystery, please answer this question:\n{1}'.format(introduce_self, icebreaker)
+    Text2Send = '**Hello and Welcome to Spirit!**\nBefore letting you into the bathhouse, please copy and fill out this template below and post it in {0.mention}\n'.format(introduce_self)
+    copytext = "-------------------------\nName: \nIGN: \nBirthday: \nMystery:\n-------------------------\n"
+    icebreaker_string = "*For the Mystery, please answer this question:\n*{0}*".format(icebreaker.strip("\n"))
     channel = await member.create_dm()
     await channel.send(Text2Send)
+    await channel.send(copytext)
+    await channel.send(icebreaker_string)
   
     role = discord.utils.get(member.guild.roles, id=868056296534999080)
     await member.add_roles(role)
