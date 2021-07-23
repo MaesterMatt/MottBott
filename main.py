@@ -81,32 +81,51 @@ async def on_message(message):
       sujung = random.randint(0, eggjungImageCount-1)
       suwu = 'eggjung/eggjung' + str(sujung) + '.jpg'
       await message.channel.send(file=discord.File(suwu))
-    
+
+    print()
+    #The unknown spirit messaged in the welcome channel
+    if message.channel == client.get_channel(865854495760973834):
+      ghost_role = discord.utils.get(message.author.guild.roles, id=868056296534999080)
+      if message.author.top_role == ghost_role:
+        intromsg = message.content
+        if intromsg.find("Name") > 0 and intromsg.find("IGN") > 0 and intromsg.find("Birthday") > 0 and intromsg.find("Mystery") > 0:
+          await message.author.remove_roles(ghost_role)
+          general = client.get_channel(495284966876512258)
+
+          spies_role = discord.utils.get(message.author.guild.roles, id=727473839268691968)
+          await message.author.add_roles(spies_role)
+          mylist = ["**Welcome to Spirit!** We're excited to see you ", "**Welcome to Spirit** BINCH... Enjoy your stay ", "**SSSUUUUUUUHHHHHHHHHHHHH** ", "SHEEEEEEEEEEEEEEEEEEEEEEEEEESH ", "Welcome to spirit! I'm ugly "]
+          rand_quote = mylist[random.randint(0, len(mylist)-1)]
+          self_add_roles = client.get_channel(717216767222480896)
+          newUserDMMessage = rand_quote + "{0.mention}!\nPlease check out the roles in {1.mention}".format(message.author, self_add_roles)
+        
+          #newUserDMMessage2 = 'Please check out the roles in {1.mention}'.format()
+          await general.send(file=discord.File('marc.gif'))
+          await general.send(newUserDMMessage)
+        else:
+          errorDM = "Hi, it seems like you need to copy the following template exactly:\n"
+          errorDM2 = "-------------------------\nName: \nIGN: \nBirthday: \nMystery:\n-------------------------"
+          await message.delete()
+          channel = await message.author.create_dm()
+          await channel.send(errorDM)
+          await channel.send(errorDM2)
+
+      #await general.send(newUserDMMessage2)
 
 
 #Public Welcome
 @client.event
 async def on_member_join(member):
-    mylist = ["**Welcome to Spirit!** We're excited to see you ", "**Welcome to Spirit** BINCH... Enjoy your stay ", "**SSSUUUUUUUHHHHHHHHHHHHH** ", "SHEEEEEEEEEEEEEEEEEEEEEEEEEESH ", "Welcome to spirit! I'm ugly "]
-    rand_quote = mylist[random.randint(0, len(mylist)-1)]
-    newUserDMMessage = rand_quote + member.name + "!\n"
-    self_add_roles = client.get_channel(717216767222480896)
-    print(self_add_roles.name)
-    newUserDMMessage2 = 'Please check out the roles in {0.mention}'.format(self_add_roles)
-    
-    print("Recognized that " + member.name + " joined")
-
     introduce_self = client.get_channel(865854495760973834)
-    Text2Send = 'Hello! Welcome to Spirit!\nBefore letting you into the bathhouse, please copy and fill out this template and post it in {0.mention}\n\nName: \n IGN: \n Birthday: \n '.format(introduce_self)
+    icebreaker = ""
+    with open('icebreakers.txt') as fr: 
+        lines = fr.readlines() 
+        icebreaker = random.choice(lines) if lines else None 
+    Text2Send = '**Hello and Welcome to Spirit!**\nBefore letting you into the bathhouse, please copy and fill out this template below and post it in {0.mention}\n\nName: \nIGN: \nBirthday: \nMystery*: \n\n*For the mystery, please answer this question:\n{1}'.format(introduce_self, icebreaker)
     channel = await member.create_dm()
     await channel.send(Text2Send)
   
-    role = discord.utils.get(member.guild.roles, id=727473839268691968)
+    role = discord.utils.get(member.guild.roles, id=868056296534999080)
     await member.add_roles(role)
-    time.sleep(1)
-    await member.guild.system_channel.send(newUserDMMessage)
-    await member.guild.system_channel.send(file=discord.File('marc.gif'))
-    await member.guild.system_channel.send(newUserDMMessage2)
-
 
 client.run(os.getenv('TOKEN'))
