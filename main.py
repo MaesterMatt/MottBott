@@ -5,6 +5,8 @@ import time
 import random
 import asyncio
 import logging
+import csv
+from datetime import datetime
 
 #client = discord.Client()
 
@@ -31,14 +33,14 @@ async def on_message(message):
         emoji = '\U0001F922'#'\N{2764}'
         emoji2 = '\U00002764'
         darren = random.randint(0, 10)
-        if str(message.author) == "$hwayjung#9949":
+        if message.author.id == 497640446328307713:
           await message.add_reaction(emoji if darren == 0 else emoji2)
         else:
           await message.add_reaction(emoji2 if darren == 0 else emoji)
 
     #For Julia Nuts emoji reaction
     global juwi_last
-    if str(message.author) == "juwi#8008" and (time.time()-juwi_last > 60):
+    if message.author.id == 108011901136519168 and (time.time()-juwi_last > 120):
         emoji = '\U0001F1F3'
         await message.add_reaction(emoji)
         emoji = '\U0001F1FA'
@@ -50,7 +52,7 @@ async def on_message(message):
         juwi_last = time.time()
 
     global lauren_last
-    if str(message.author) == "Lauren#2084" and (time.time()-lauren_last > 60):
+    if message.author == 575585308251521035 and (time.time()-lauren_last > 120):
         emoji = '\U0001F1ED'
         await message.add_reaction(emoji)
         emoji = '\U0001F1E7'
@@ -60,9 +62,9 @@ async def on_message(message):
         lauren_last = time.time()
 
     #Hau sux
-    if 'hau' in message.content.lower():
-      hau = bool(random.getrandbits(1))
-      await message.channel.send('sux' if hau else 'doesn\'t sux')
+    # if 'hau' in message.content.lower():
+    #   hau = bool(random.getrandbits(1))
+    #   await message.channel.send('sux' if hau else 'doesn\'t sux')
 
     mylist = ["JCJCJCJCJCJCJCJC", ".................JC!", "down >:)", "Oh sorry I'm busy", "just go w/o me idk wtf is wrong with this game", "I'm out right now", "How about in like an hour?", "Im going to dentist ...", "I WNA NAP", "I’m at hospital", "IM GETTING THE BEE OUT STILL", "It's too late for JC now, imma go to zak", "LMAO WTF IS THIS SHIT im going out ....", "LOL", "gimme like 15 mins me finishign dinner", "omg it says we are unable to connect to maplelegends"]
     if 'jc' in message.content.lower():
@@ -147,5 +149,23 @@ async def on_member_join(member):
   
     role = discord.utils.get(member.guild.roles, id=868056296534999080)
     await member.add_roles(role)
+
+#General: 495284966876512258
+@client.event
+async def time_check():
+  await client.wait_until_ready()
+  message_channel = client.get_channel(860799304134426625)
+  send_time = datetime.strftime(datetime.now(),'%H:%M')
+  while True:
+    now=datetime.strftime(datetime.now(),'%H:%M')
+    if now[3:] == '00':
+      message= now
+      await message_channel.send(message)
+      time = 3500
+    else:
+      time = 50
+    await asyncio.sleep(time)
+
+client.loop.create_task(time_check())
 
 client.run(os.getenv('TOKEN'))
