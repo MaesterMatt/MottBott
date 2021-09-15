@@ -157,7 +157,7 @@ async def time_check():
   message_channel = client.get_channel(860799304134426625)
   send_time = datetime.strftime(datetime.now(),'%m:%d-%H:%M')
   while True:
-    now=datetime.strftime(datetime.now(),'$m:%d-%H:%M')
+    now=datetime.strftime(datetime.now(),'%m:%d-%H:%M')
     if now[9:] == '00':
       message= now
       await message_channel.send(message)
