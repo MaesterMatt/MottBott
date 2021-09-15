@@ -155,10 +155,10 @@ async def on_member_join(member):
 async def time_check():
   await client.wait_until_ready()
   message_channel = client.get_channel(860799304134426625)
-  send_time = datetime.strftime(datetime.now(),'%H:%M')
+  send_time = datetime.strftime(datetime.now(),'%m:%d-%H:%M')
   while True:
-    now=datetime.strftime(datetime.now(),'%H:%M')
-    if now[3:] == '00':
+    now=datetime.strftime(datetime.now(),'$m:%d-%H:%M')
+    if now[9:] == '00':
       message= now
       await message_channel.send(message)
       time = 3500
