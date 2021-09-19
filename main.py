@@ -117,6 +117,22 @@ async def on_message(message):
           await message.channel.send(send)
           #print(f'\tIGN: {row[0]}\'s birthday is on {row[1]}, timezone is UTC + {row[2]}. Their Discord ID is: {row[3]}, and the quote assigned is: {row[4]}')
 
+    # if '?birthdaytest' in message.content.lower():
+    #   message_channel = client.get_channel(860799304134426625)
+    #   Month = datetime.strftime(datetime.now(),'%-m')
+    #   Day = datetime.strftime(datetime.now(), '%-d')
+    #   with open('birthdays.csv') as csv_file:
+    #     csv_reader = csv.reader(csv_file, delimiter=',')
+    #     line_count = 0
+    #     for row in csv_reader:
+    #       if Month == row[1][0:row[1].find('/')] and int(Day) == int(row[1][row[1].find('/')+1:]):
+    #         bdaymsg = row[5]
+    #         #Has a mention
+    #         if bdaymsg.find('mention') and len(row[4]) > 0:
+    #           bdayperson = client.get_user(int(row[4]))
+    #           bdaymsg = bdaymsg.format(bdayperson)
+    #         await message_channel.send(bdaymsg)
+
     #The unknown spirit messaged in the welcome channel
     if message.channel == client.get_channel(865854495760973834):
       ghost_role = discord.utils.get(message.author.guild.roles, id=868056296534999080)
@@ -186,6 +202,7 @@ async def time_check():
     now=datetime.strftime(datetime.now(),'%H:%M')
     Month = datetime.strftime(datetime.now(),'%-m')
     Day = datetime.strftime(datetime.now(), '%-d')
+    BirthdayToday = False 
     #print(now[:2]) - Hour
     if now[-2:] == '00': #check csv
       with open('birthdays.csv') as csv_file:
@@ -193,11 +210,16 @@ async def time_check():
         line_count = 0
         for row in csv_reader:
           if Month == row[1][0:row[1].find('/')] and int(Day) == int(row[1][row[1].find('/')+1:]):
-            message = 'Happy Birthday ' + row[3] + '!!!'
-          else:
-            message = 'No Birthdays today :('
-          await message_channel.send(message)
+            bdaymsg = row[5]
+            #Has a mention
+            if bdaymsg.find('mention') and len(row[4]) > 0:
+              bdayperson = client.get_user(int(row[4]))
+              bdaymsg = bdaymsg.format(bdayperson)
+            BirthdayToday = True
+            await message_channel.send(bdaymsg)
       time = 3500
+      if not BirthdayToday:
+        await message_channel.send('No Birthdays Today :(')
     else:
       time = 50
     await asyncio.sleep(time)
