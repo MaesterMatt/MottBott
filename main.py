@@ -207,7 +207,6 @@ async def time_check():
     Month = datetime.strftime(datetime.now(),'%-m')
     Today = datetime.strftime(datetime.now(), '%-m/%-d')
     Tomorrow = datetime.strftime(datetime.now() + timedelta(days=1), '%-m/%-d')
-    BirthdayToday = False 
     #print(now[:2]) - Hour
     if Minute == '00': #check csv
       with open('birthdays.csv') as csv_file:
@@ -220,11 +219,8 @@ async def time_check():
             if bdaymsg.find('mention') and len(row[4]) > 0:
               bdayperson = client.get_user(int(row[4]))
               bdaymsg = bdaymsg.format(bdayperson)
-            BirthdayToday = True
             await message_channel.send(bdaymsg)
       time = 3500
-      if not BirthdayToday:
-        await message_channel.send('No Birthdays Today :(')
     else:
       time = 50
     await asyncio.sleep(time)
