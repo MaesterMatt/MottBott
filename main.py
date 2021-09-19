@@ -74,22 +74,48 @@ async def on_message(message):
         rand_quote = mylist[random.randint(0, len(mylist)-1)]
         await message.channel.send(rand_quote)
 
+    #jiaoceng image
     if 'jiaoceng' in message.content.lower():
       #bernie = "https://i.imgur.com/OAWkEbe.png"
       await message.channel.send(file=discord.File('Jiaoceng.png'))
 
+    #eggjung
     if 'eggjung' in message.content.lower():
       eggjungImageCount = len(os.listdir('eggjung/'))
-      sujung = random.randint(0, eggjungImageCount-1)
-      suwu = 'eggjung/eggjung' + str(sujung) + '.jpg'
-      await message.channel.send(file=discord.File(suwu))
+      sujung = random.randint(0, eggjungImageCount)
+      if sujung < eggjungImageCount:
+        suwu = 'eggjung/eggjung' + str(sujung) + '.jpg'
+        await message.channel.send(file=discord.File(suwu))
+      else: 
+        suwu = 'eggjung.gif'
+        await message.channel.send(file=discord.File(suwu))
 
+    #mystery question
     if '?mystery' in message.content.lower():
       with open('icebreakers.txt') as fr: 
         lines = fr.readlines() 
         icebreaker = random.choice(lines) if lines else None 
         channel = await message.author.create_dm()
         await channel.send("Your Mystery question is: \n*" + icebreaker.strip("\n") + "*\n")
+
+    if '?birthdays' in message.content.lower():
+      MonthBdays = []
+      Month = datetime.strftime(datetime.now(),'%-m')
+      Day = datetime.strftime(datetime.now(), '%-d')
+      with open('birthdays.csv') as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter=',')
+        line_count = 0
+        for row in csv_reader:
+          if Month == row[1][0:row[1].find('/')] and int(Day) <= int(row[1][row[1].find('/')+1:]):
+            MonthBdays.append(row[0] + ' on ' + row[1])
+        if len(MonthBdays) > 0:
+          listToStr = '\n'.join([str(person) for person in MonthBdays])
+          send = '**Birthdays left this month:** \n' + listToStr
+          await message.channel.send(send)
+        else:
+          send = 'No other birthdays this month :('
+          await message.channel.send(send)
+          #print(f'\tIGN: {row[0]}\'s birthday is on {row[1]}, timezone is UTC + {row[2]}. Their Discord ID is: {row[3]}, and the quote assigned is: {row[4]}')
 
     #The unknown spirit messaged in the welcome channel
     if message.channel == client.get_channel(865854495760973834):
@@ -155,12 +181,22 @@ async def on_member_join(member):
 async def time_check():
   await client.wait_until_ready()
   message_channel = client.get_channel(860799304134426625)
-  send_time = datetime.strftime(datetime.now(),'%m:%d-%H:%M')
+  send_time = datetime.strftime(datetime.now(),'%-m/%d-%H:%M')
   while True:
-    now=datetime.strftime(datetime.now(),'%m:%d-%H:%M')
-    if now[9:] == '00':
-      message= now
-      await message_channel.send(message)
+    now=datetime.strftime(datetime.now(),'%H:%M')
+    Month = datetime.strftime(datetime.now(),'%-m')
+    Day = datetime.strftime(datetime.now(), '%-d')
+    #print(now[:2]) - Hour
+    if now[-2:] == '00': #check csv
+      with open('birthdays.csv') as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter=',')
+        line_count = 0
+        for row in csv_reader:
+          if Month == row[1][0:row[1].find('/')] and int(Day) == int(row[1][row[1].find('/')+1:]):
+            message = 'Happy Birthday ' + row[3] + '!!!'
+          else:
+            message = 'No Birthdays today :('
+          await message_channel.send(message)
       time = 3500
     else:
       time = 50
