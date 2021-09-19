@@ -6,7 +6,7 @@ import random
 import asyncio
 import logging
 import csv
-from datetime import datetime
+from datetime import datetime, timedelta
 
 #client = discord.Client()
 
@@ -117,21 +117,24 @@ async def on_message(message):
           await message.channel.send(send)
           #print(f'\tIGN: {row[0]}\'s birthday is on {row[1]}, timezone is UTC + {row[2]}. Their Discord ID is: {row[3]}, and the quote assigned is: {row[4]}')
 
-    # if '?birthdaytest' in message.content.lower():
-    #   message_channel = client.get_channel(860799304134426625)
-    #   Month = datetime.strftime(datetime.now(),'%-m')
-    #   Day = datetime.strftime(datetime.now(), '%-d')
-    #   with open('birthdays.csv') as csv_file:
-    #     csv_reader = csv.reader(csv_file, delimiter=',')
-    #     line_count = 0
-    #     for row in csv_reader:
-    #       if Month == row[1][0:row[1].find('/')] and int(Day) == int(row[1][row[1].find('/')+1:]):
-    #         bdaymsg = row[5]
-    #         #Has a mention
-    #         if bdaymsg.find('mention') and len(row[4]) > 0:
-    #           bdayperson = client.get_user(int(row[4]))
-    #           bdaymsg = bdaymsg.format(bdayperson)
-    #         await message_channel.send(bdaymsg)
+    if '?birthdaytest' in message.content.lower():
+      message_channel = client.get_channel(860799304134426625)
+      Hour = datetime.strftime(datetime.now(),'%-H')
+      Month = datetime.strftime(datetime.now(),'%-m')
+      Day = datetime.strftime(datetime.now(), '%-d')
+      Today = datetime.strftime(datetime.now(),'%-m/%-d')
+      Tomorrow = datetime.strftime(datetime.now() + timedelta(days=1), '%-m/%-d')
+      with open('birthdays.csv') as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter=',')
+        line_count = 0
+        for row in csv_reader:
+          if (int(row[2]) + int(Hour) == 24 and Tomorrow == row[1]) or (int(row[2]) + int(Hour) == 0 and Today == row[1]):
+            bdaymsg = row[5]
+            #Has a mention
+            if bdaymsg.find('mention') and len(row[4]) > 0:
+              bdayperson = client.get_user(int(row[4]))
+              bdaymsg = bdaymsg.format(bdayperson)
+            await message_channel.send(bdaymsg)
 
     #The unknown spirit messaged in the welcome channel
     if message.channel == client.get_channel(865854495760973834):
@@ -199,17 +202,19 @@ async def time_check():
   message_channel = client.get_channel(860799304134426625)
   send_time = datetime.strftime(datetime.now(),'%-m/%d-%H:%M')
   while True:
-    now=datetime.strftime(datetime.now(),'%H:%M')
+    Hour=datetime.strftime(datetime.now(),'%-H')
+    Minute=datetime.strftime(datetime.now(),'%M')
     Month = datetime.strftime(datetime.now(),'%-m')
-    Day = datetime.strftime(datetime.now(), '%-d')
+    Today = datetime.strftime(datetime.now(), '%-m/%-d')
+    Tomorrow = datetime.strftime(datetime.now() + timedelta(days=1), '%-m/%-d')
     BirthdayToday = False 
     #print(now[:2]) - Hour
-    if now[-2:] == '00': #check csv
+    if Minute == '00': #check csv
       with open('birthdays.csv') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         line_count = 0
         for row in csv_reader:
-          if Month == row[1][0:row[1].find('/')] and int(Day) == int(row[1][row[1].find('/')+1:]):
+          if (int(row[2]) + int(Hour) == 24 and Tomorrow == row[1]) or (int(row[2]) + int(Hour) == 0 and Today == row[1]):
             bdaymsg = row[5]
             #Has a mention
             if bdaymsg.find('mention') and len(row[4]) > 0:
