@@ -199,7 +199,7 @@ async def on_member_join(member):
 @client.event
 async def time_check():
   await client.wait_until_ready()
-  message_channel = client.get_channel(860799304134426625)
+  message_channel = client.get_channel(495284966876512258)
   send_time = datetime.strftime(datetime.now(),'%-m/%d-%H:%M')
   while True:
     Hour=datetime.strftime(datetime.now(),'%-H')
