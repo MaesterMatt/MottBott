@@ -38,6 +38,11 @@ async def on_message(message):
         else:
           await message.add_reaction(emoji2 if darren == 0 else emoji)
 
+    if 'fak u bot' in message.content.lower() and message.author.id == 134019734193700864:
+      mylist = ["#botlivesmatter", "How dare you talk to BSFW like that!", "Stop it hoolian", "Julian is mean to bots confirmed", "fak u hooman", "meanie :(", "Issok BSFW I luv u", "bot luv", "botist", "It's 2021 no bot shaming", "You're ugly", "No booli", "stop being mean to BSFW", "fak u hoolian", "give bsfw a break, it's trying its best", "go back to BL5"]
+      rand_quote = mylist[random.randint(0, len(mylist)-1)]
+      await message.channel.send(rand_quote)
+
     #For Julia Nuts emoji reaction
     global juwi_last
     if message.author.id == 108011901136519168 and (time.time()-juwi_last > 120):
