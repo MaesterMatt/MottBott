@@ -146,33 +146,37 @@ async def on_message(message):
       ghost_role = discord.utils.get(message.author.guild.roles, id=868056296534999080)
       if message.author.top_role == ghost_role:
         intromsg = message.content
-        if intromsg.find("Name") > 0 and intromsg.find("IGN") > 0 and intromsg.find("Birthday") > 0 and intromsg.find("Mystery") > 0:
+        if intromsg.find("Name") > 0 and intromsg.find("IGN") > 0:
           name = message.content[intromsg.find("Name")+5:intromsg.find("\n", intromsg.find("Name")+5)].strip(" \n")
-          print("Name: " + name)
           ign = message.content[intromsg.find("IGN")+4:intromsg.find("\n", intromsg.find("IGN")+4)].strip(" \n")
+
+          if name.find(" ") > 0:
+            name = name[:name.find(" ")]
+          if name.find("/") > 0:
+            name = name[:name.find("/")]
+          if ign.find(" ") > 0:
+            ign = ign[:ign.find(" ")]
+          if ign.find("/") > 0:
+            ign = ign[:ign.find("/")]
+          print("Name: " + name)
           print("IGN: " + ign)
 
-          if len(name) and len(ign) and len(name) + len(ign) < 29:
-            nickname = name + " | " + ign
-            await message.author.edit(nick=nickname)
+ #         if len(name) and len(ign) and len(name) + len(ign) < 29:
+          nickname = name + " | " + ign
+          await message.author.edit(nick=nickname)
 
-            await message.author.remove_roles(ghost_role)
-            general = client.get_channel(495284966876512258)
-            spies_role = discord.utils.get(message.author.guild.roles, id=727473839268691968)
-            await message.author.add_roles(spies_role)
-            mylist = ["**Welcome to Spirit!** We're excited to see you ", "**Welcome to Spirit** BINCH... Enjoy your stay ", "**SSSUUUUUUUHHHHHHHHHHHHH** ", "SHEEEEEEEEEEEEEEEEEEEEEEEEEESH ", "Welcome to spirit! I'm ugly "]
-            rand_quote = mylist[random.randint(0, len(mylist)-1)]
-            self_add_roles = client.get_channel(717216767222480896)
-            newUserDMMessage = rand_quote + "{0.mention}!\nPlease check out the roles in {1.mention}".format(message.author, self_add_roles)
-          
-            #newUserDMMessage2 = 'Please check out the roles in {1.mention}'.format()
-            await general.send(file=discord.File('marc.gif'))
-            await general.send(newUserDMMessage)
-          else:
-            errorDM = "Hi, please give us your name and IGN(In Game Name)\n*Must be fewer than 28 characters total*\n"
-            await message.delete()
-            channel = await message.author.create_dm()
-            await channel.send(errorDM)
+          await message.author.remove_roles(ghost_role)
+          general = client.get_channel(495284966876512258)
+          spies_role = discord.utils.get(message.author.guild.roles, id=727473839268691968)
+          await message.author.add_roles(spies_role)
+          mylist = ["**Welcome to Spirit!** We're excited to see you ", "**Welcome to Spirit** BINCH... Enjoy your stay ", "**SSSUUUUUUUHHHHHHHHHHHHH** ", "SHEEEEEEEEEEEEEEEEEEEEEEEEEESH ", "Welcome to spirit! I'm ugly "]
+          rand_quote = mylist[random.randint(0, len(mylist)-1)]
+          self_add_roles = client.get_channel(717216767222480896)
+          newUserDMMessage = rand_quote + "{0.mention}!\nPlease check out the roles in {1.mention}".format(message.author, self_add_roles)
+        
+          #newUserDMMessage2 = 'Please check out the roles in {1.mention}'.format()
+          await general.send(file=discord.File('marc.gif'))
+          await general.send(newUserDMMessage)
         else:
           errorDM = "Hi, it seems like you need to copy the following template exactly:\n"
           errorDM2 = "-------------------------\nName: \nIGN: \nBirthday: \nMystery:\n-------------------------"
