@@ -21,7 +21,8 @@ async def on_ready():
 juwi_last = time.time()-60
 lauren_last = time.time()-60
 @client.event
-async def on_message(message):      
+async def on_message(message):  
+    msg_lower = message.content.lower()
     if message.author == client.user:
         return
 
@@ -29,7 +30,7 @@ async def on_message(message):
         await message.channel.send('Hey Daddy ~')
 
     #darren nauseous react
-    if 'darren' in message.content.lower():
+    if 'darren' in msg_lower:
         emoji = '\U0001F922'#'\N{2764}'
         emoji2 = '\U00002764'
         darren = random.randint(0, 10)
@@ -38,7 +39,7 @@ async def on_message(message):
         else:
           await message.add_reaction(emoji2 if darren == 0 else emoji)
 
-    if 'fak u bot' in message.content.lower() and message.author.id == 134019734193700864:
+    if 'fak u bot' in msg_lower and message.author.id == 134019734193700864:
       mylist = ["#botlivesmatter", "How dare you talk to BSFW like that!", "Stop it hoolian", "Julian is mean to bots confirmed", "fak u hooman", "meanie :(", "Issok BSFW I luv u", "bot luv", "botist", "It's 2021 no bot shaming", "You're ugly", "No booli", "stop being mean to BSFW", "fak u hoolian", "give bsfw a break, it's trying its best", "go back to BL5"]
       rand_quote = mylist[random.randint(0, len(mylist)-1)]
       await message.channel.send(rand_quote)
@@ -67,43 +68,47 @@ async def on_message(message):
         lauren_last = time.time()
 
     #Hau sux
-    # if 'hau' in message.content.lower():
+    # if 'hau' in msg_lower:
     #   hau = bool(random.getrandbits(1))
     #   await message.channel.send('sux' if hau else 'doesn\'t sux')
 
     mylist = ["JCJCJCJCJCJCJCJC", ".................JC!", "down >:)", "Oh sorry I'm busy", "just go w/o me idk wtf is wrong with this game", "I'm out right now", "How about in like an hour?", "Im going to dentist ...", "I WNA NAP", "I’m at hospital", "IM GETTING THE BEE OUT STILL", "It's too late for JC now, imma go to zak", "LMAO WTF IS THIS SHIT im going out ....", "LOL", "gimme like 15 mins me finishign dinner", "omg it says we are unable to connect to maplelegends"]
-    if 'jc' in message.content.lower():
-      if 'no jc' in message.content.lower():
+    if 'jc' in msg_lower:
+      if 'no jc' in msg_lower:
         await message.channel.send(file=discord.File('nojc.png'))
       else:
         rand_quote = mylist[random.randint(0, len(mylist)-1)]
         await message.channel.send(rand_quote)
 
     #jiaoceng image
-    if 'jiaoceng' in message.content.lower():
+    if 'jiaoceng' in msg_lower:
       #bernie = "https://i.imgur.com/OAWkEbe.png"
       await message.channel.send(file=discord.File('Jiaoceng.png'))
 
     #eggjung
-    if 'eggjung' in message.content.lower():
-      eggjungImageCount = len(os.listdir('eggjung/'))
-      sujung = random.randint(0, eggjungImageCount)
-      if sujung < eggjungImageCount:
-        suwu = 'eggjung/eggjung' + str(sujung) + '.jpg'
-        await message.channel.send(file=discord.File(suwu))
-      else: 
-        suwu = 'eggjung.gif'
-        await message.channel.send(file=discord.File(suwu))
+    if 'eggjung' in msg_lower:
+      print(len(msg_lower[7:]))
+      if len(msg_lower[7:] > 0):
+        suwu = 'eggjung/eggjung' + str(msg_lower[7:]).strip(" \n") + '.jpg'
+      else:
+        eggjungImageCount = len(os.listdir('eggjung/'))
+        sujung = random.randint(0, eggjungImageCount)
+        if sujung < eggjungImageCount:
+          suwu = 'eggjung/eggjung' + str(sujung) + '.jpg'
+          await message.channel.send(file=discord.File(suwu))
+        else: 
+          suwu = 'eggjung.gif'
+          await message.channel.send(file=discord.File(suwu))
 
     #mystery question
-    if '?mystery' in message.content.lower():
+    if '?mystery' in msg_lower:
       with open('icebreakers.txt') as fr: 
         lines = fr.readlines() 
         icebreaker = random.choice(lines) if lines else None 
         channel = await message.author.create_dm()
         await channel.send("Your Mystery question is: \n*" + icebreaker.strip("\n") + "*\n")
 
-    if '?birthdays' in message.content.lower():
+    if '?birthdays' in msg_lower:
       MonthBdays = []
       Month = datetime.strftime(datetime.now(),'%-m')
       Day = datetime.strftime(datetime.now(), '%-d')
@@ -122,7 +127,7 @@ async def on_message(message):
           await message.channel.send(send)
           #print(f'\tIGN: {row[0]}\'s birthday is on {row[1]}, timezone is UTC + {row[2]}. Their Discord ID is: {row[3]}, and the quote assigned is: {row[4]}')
 
-    if '?birthdaytest' in message.content.lower():
+    if '?birthdaytest' in msg_lower:
       message_channel = client.get_channel(860799304134426625)
       Hour = datetime.strftime(datetime.now(),'%-H')
       Month = datetime.strftime(datetime.now(),'%-m')
