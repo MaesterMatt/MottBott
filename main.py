@@ -163,6 +163,8 @@ async def on_message(message):
             ign = ign[:ign.find(" ")]
           if ign.find("/") > 0:
             ign = ign[:ign.find("/")]
+          if ign.find(",") > 0:
+            ign = ign[:ign.find(",")]
           print("Name: " + name)
           print("IGN: " + ign)
 
