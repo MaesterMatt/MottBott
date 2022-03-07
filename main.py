@@ -88,15 +88,20 @@ async def on_message(message):
 
     #eggjung
     if 'eggjung' in msg_lower:
-      suwu = 'eggjung.gif'
-      if len(msg_lower) > 7:
-        suwu = 'eggjung/eggjung' + str(msg_lower[7:]).strip(" \n") + '.jpg'
+      suwu = ""
+      eggjungImageCount = len(os.listdir('eggjung/'))
+      if 'eggjung count' in msg_lower:
+        await message.channel.send("There are " + str(eggjungImageCount) + "eggjungs.")
       else:
-        eggjungImageCount = len(os.listdir('eggjung/'))
-        sujung = random.randint(0, eggjungImageCount)
-        if sujung < eggjungImageCount:
-          suwu = 'eggjung/eggjung' + str(sujung) + '.jpg'
-      await message.channel.send(file=discord.File(suwu))
+        if 'eggjung gif' in msg_lower:
+          suwu = 'eggjung.gif'
+        else if len(msg_lower) > 7:
+          suwu = 'eggjung/eggjung' + str(msg_lower[7:]).strip(" \n") + '.jpg'
+        else:
+          sujung = random.randint(0, eggjungImageCount)
+          if sujung < eggjungImageCount:
+            suwu = 'eggjung/eggjung' + str(sujung) + '.jpg'
+        await message.channel.send(file=discord.File(suwu))
 
     #mystery question
     if '?mystery' in msg_lower:
