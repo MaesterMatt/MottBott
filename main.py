@@ -95,7 +95,7 @@ async def on_message(message):
       else:
         if 'eggjung gif' in msg_lower:
           suwu = 'eggjung.gif'
-        else if len(msg_lower) > 7:
+        elif len(msg_lower) > 7:
           suwu = 'eggjung/eggjung' + str(msg_lower[7:]).strip(" \n") + '.jpg'
         else:
           sujung = random.randint(0, eggjungImageCount)
