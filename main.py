@@ -91,7 +91,7 @@ async def on_message(message):
       suwu = ""
       eggjungImageCount = len(os.listdir('eggjung/'))
       if 'eggjung count' in msg_lower:
-        await message.channel.send("There are " + str(eggjungImageCount - 1) + " eggjungs.")
+        await message.channel.send("There are " + str(eggjungImageCount) + " eggjungs.")
       else:
         if 'eggjung gif' in msg_lower:
           suwu = 'eggjung.gif'
