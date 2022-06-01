@@ -44,8 +44,12 @@ async def on_message(message):
     if 'who' in msg_lower:
       savewho = message.id
       channelwho = message.channel.id
+      print(savewho)
+      print(channelwho)
 
     if 'asked' in msg_lower:
+      print(savewho)
+      print(channelwho)
       if not savewho and not channelwho:
         todeletechannel = client.get_channel(channelwho)
         todelete = await todeletechannel.fetch_message(savewho)
