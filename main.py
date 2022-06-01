@@ -41,7 +41,8 @@ async def on_message(message):
     if 'who' in msg_lower:
       savewho = message
 
-    if 'asked' == msg_lower:
+    if 'asked' in msg_lower:
+      await message.channel.send(savewho.content.lower())
       if savewho is not None:
         await message.channel.send(savewho.content.lower())
         await savewho.delete()
