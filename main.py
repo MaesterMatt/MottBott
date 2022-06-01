@@ -50,8 +50,8 @@ async def on_message(message):
         todelete = await todeletechannel.fetch_message(savewho)
         savewho = message.id
         channelwho = message.channel.id
-        await todelete.delete()
         await message.delete()
+        await todelete.delete()
     elif 'who' in "".join(msg_lower.split()) or 'nobody' in "".join(msg_lower.split()):
       savewho = message.id
       channelwho = message.channel.id
