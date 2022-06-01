@@ -46,7 +46,7 @@ async def on_message(message):
       if len(savewho) > 0:
         savewho_list = savewho.pop(len(savewho)-1)
         if message.author.id == savewho_list[0]:
-          todeletechannel = client.get_channel(savewho_dict[2])
+          todeletechannel = client.get_channel(savewho_list[2])
           todelete = await todeletechannel.fetch_message(savewho_list[1])
           await message.delete()
           await todelete.delete()
