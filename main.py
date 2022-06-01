@@ -48,8 +48,6 @@ async def on_message(message):
       if len(savewho) > 0:
         todeletechannel = client.get_channel(channelwho.pop(len(channelwho)-1))
         todelete = await todeletechannel.fetch_message(savewho.pop(len(channelwho)-1))
-        savewho = message.id
-        channelwho = message.channel.id
         await message.delete()
         await todelete.delete()
     elif 'who' in "".join(msg_lower.split()) or 'nobody' in "".join(msg_lower.split()):
