@@ -32,17 +32,22 @@ async def on_message(message):
     if client.user.mentioned_in(message):
         await message.channel.send('Hey Daddy ~')
 
+    if 'pepega' in msg_lower.split().join():
+      channel = await message.author.create_dm()
+      await channel.send('Hi, the word Pepega has been removed from Spirit discord. This word is a common replacement for the word "Retard". This goes against the community in which we hope to build. :) Thank you for your understanding')
+      await message.delete()
+      
     #who asked removal
-    if 'who asked?' == msg_lower:
+    if 'who asked' in msg_lower:
         await message.delete()
 
-    if 'nobody asked' == msg_lower or 'no one asked' == msg_lower:
+    if 'nobody asked' in msg_lower or 'no one asked' in msg_lower:
       await message.delete()
 
     global savewho
     global channelwho
 
-    if 'asked' in msg_lower.strip():
+    if 'asked' in msg_lower.split().join():
       if savewho != 0 and channelwho != 0:
         todeletechannel = client.get_channel(channelwho)
         todelete = await todeletechannel.fetch_message(savewho)
@@ -51,7 +56,7 @@ async def on_message(message):
         await todelete.delete()
         await message.delete()
 
-    if 'who' in msg_lower.strip():
+    if 'who' in msg_lower.split().join():
       savewho = message.id
       channelwho = message.channel.id
       
