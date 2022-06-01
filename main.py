@@ -25,7 +25,7 @@ savewho = []
 @client.event
 async def on_message(message):  
     msg_lower = message.content.lower()
-    msg_noyt = "".join(msg_lower).split()
+    msg_noyt = "".join(msg_lower).split().replace("?","").replace(".","")
     if message.author == client.user:
         return
 
