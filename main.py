@@ -32,8 +32,11 @@ async def on_message(message):
         await message.channel.send('Hey Daddy ~')
 
     #who asked removal
-    if 'who asked?' or 'nobody asked' in msg_lower:
+    if 'who asked?' == msg_lower:
         await message.delete()
+
+    if 'nobody asked' == msg_lower:
+      await message.delete()
 
     if 'who' in msg_lower:
       savewho = message
