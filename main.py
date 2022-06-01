@@ -39,11 +39,11 @@ async def on_message(message):
     if 'nobody asked' == msg_lower:
       await message.delete()
 
+    global savewho
+    global channelwho
     if 'who' in msg_lower:
       savewho = message.id
       channelwho = message.channel.id
-      await message.channel.send(savewho.content.lower())
-
 
     if 'asked' in msg_lower:
       if not savewho and not channelwho:
