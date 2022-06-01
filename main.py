@@ -25,24 +25,25 @@ savewho = []
 @client.event
 async def on_message(message):  
     msg_lower = message.content.lower()
+    msg_noyt = "".join(msg_lower).split()
     if message.author == client.user:
         return
 
     if client.user.mentioned_in(message):
         await message.channel.send('Hey Daddy ~')
 
-    if 'pepega' in "".join(msg_lower.split()):
+    if 'pepega' in msg_noyt:
       channel = await message.author.create_dm()
       await channel.send('Hi, the word Pepega has been removed from Spirit discord. This word is a common replacement for the word "Retard". This goes against the community in which we hope to build. :) Thank you for your understanding')
       await message.delete()
       
     #who asked removal
     global savewho
-    if 'who asked' in msg_lower:
+    if 'whoasked' in msg_noyt:
         await message.delete()
-    elif 'nobody asked' in msg_lower or 'no one asked' in msg_lower:
+    elif 'nobodyasked' in msg_noyt or 'nooneasked' in msg_noyt:
       await message.delete()
-    elif 'asked' in "".join(msg_lower.split()):
+    elif 'asked' in msg_noyt:
       if len(savewho) > 0:
         savewho_list = savewho.pop(len(savewho)-1)
         if message.author.id == savewho_list[0]:
@@ -50,7 +51,7 @@ async def on_message(message):
           todelete = await todeletechannel.fetch_message(savewho_list[1])
           await message.delete()
           await todelete.delete()
-    elif 'who' in "".join(msg_lower.split()) or 'nobody' in "".join(msg_lower.split()):
+    elif 'who' in msg_noyt or 'nobody' in msg_noyt:
       if len(savewho) > 10:
         savewho.clear()
         #channelwho.clear()
