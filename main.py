@@ -50,6 +50,7 @@ async def on_message(message):
       if not savewho:
         await message.delete()
         await savewho.delete()
+        savewho = None
       # if not savewho and not channelwho:
       #   todeletechannel = client.get_channel(channelwho)
       #   todelete = await todeletechannel.fetch_message(savewho)
