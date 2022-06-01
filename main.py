@@ -21,6 +21,7 @@ async def on_ready():
 
 juwi_last = time.time()-60
 lauren_last = time.time()-60
+savewho = None
 @client.event
 async def on_message(message):  
     msg_lower = message.content.lower()
@@ -30,6 +31,19 @@ async def on_message(message):
     if client.user.mentioned_in(message):
         await message.channel.send('Hey Daddy ~')
 
+    #who asked removal
+    if 'who asked?' or 'nobody asked' in msg_lower:
+        await message.delete()
+
+    if 'who' in msg_lower:
+      savewho = message
+
+    if 'asked' in msg_lower:
+      if savewho is not None:
+        await savewho.delete()
+        savewho = None
+        await message.delete()
+      
     #darren nauseous react
     if 'darren' in msg_lower:
         emoji = '\U0001F922'#'\N{2764}'
