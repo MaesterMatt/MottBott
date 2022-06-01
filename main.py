@@ -21,7 +21,8 @@ async def on_ready():
 
 juwi_last = time.time()-60
 lauren_last = time.time()-60
-savewho = None
+savewho = 0
+channelwho = 0
 @client.event
 async def on_message(message):  
     msg_lower = message.content.lower()
@@ -39,16 +40,18 @@ async def on_message(message):
       await message.delete()
 
     if 'who' in msg_lower:
-      savewho = message
+      savewho = message.id
+      channelwho = message.channel.id
       await message.channel.send(savewho.content.lower())
 
 
     if 'asked' in msg_lower:
-      await message.channel.send(message.content.lower())
-      if savewho is not None:
-        await savewho.delete()
-        savewho = None
-        await message.delete()
+      if not savewho and not channelwho:
+        todeletechannel = client.get_channel(channelwho)
+        todelete = await todeletechannel.fetch_message(savewho)
+        savewho = 0
+        channelwho = 0
+        await todelete.delete()
       
     #darren nauseous react
     if 'darren' in msg_lower:
