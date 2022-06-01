@@ -24,8 +24,8 @@ lauren_last = time.time()-60
 savewho = []
 @client.event
 async def on_message(message):  
-    msg_lower = message.content.lower()[0]
-    msg_noyt = "".join(msg_lower.replace("?","").replace(".","")).split()
+    msg_lower = message.content.lower()
+    msg_noyt = "".join(msg_lower[0].replace("?","").replace(".","")).split()
 
     if message.author == client.user:
         return
