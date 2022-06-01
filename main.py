@@ -40,7 +40,7 @@ async def on_message(message):
     #who asked removal
     global savewho
     if ('who' in msg_noyt or 'no' in msg_noyt) and 'asked' in msg_noyt:
-      if len(message.content) < 25
+      if len(message.content) < 25:
         await message.delete()
     elif 'asked' in msg_noyt:
       if len(savewho) > 0 and len(message.content) < 10:
@@ -54,7 +54,7 @@ async def on_message(message):
       if len(savewho) > 10:
         savewho.clear()
         #channelwho.clear()
-      if len(message.content) < 10
+      if len(message.content) < 10:
         savewho.append([message.author.id, message.id, message.channel.id])
       #channelwho.append({message.author.id, message.channel.id})
       
