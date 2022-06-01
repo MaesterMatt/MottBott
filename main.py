@@ -27,6 +27,7 @@ async def on_message(message):
     msg_lower = message.content.lower()
     msg_noyt = "".join(msg_lower.replace("?","").replace(".","")).split()
     print(msg_noyt)
+    print('who' in msg_noyt)
 
     if message.author == client.user:
         return
@@ -41,10 +42,10 @@ async def on_message(message):
       
     #who asked removal
     global savewho
-    if ('who' in msg_noyt or 'no' in msg_noyt) and 'asked' in msg_noyt:
+    if ("who" in msg_noyt or "no" in msg_noyt) and "asked" in msg_noyt:
       if len(message.content) < 25:
         await message.delete()
-    elif 'asked' in msg_noyt:
+    elif "asked" in msg_noyt:
       if len(savewho) > 0 and len(message.content) < 10:
         savewho_list = savewho.pop(len(savewho)-1)
         if message.author.id == savewho_list[0]:
@@ -52,7 +53,7 @@ async def on_message(message):
           todelete = await todeletechannel.fetch_message(savewho_list[1])
           await message.delete()
           await todelete.delete()
-    elif 'who' in msg_noyt or 'nobody' in msg_noyt:
+    elif "who" in msg_noyt or "nobody" in msg_noyt:
       if len(savewho) > 10:
         savewho.clear()
         #channelwho.clear()
