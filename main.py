@@ -46,12 +46,12 @@ async def on_message(message):
       if savewho != 0 and channelwho != 0:
         todeletechannel = client.get_channel(channelwho)
         todelete = await todeletechannel.fetch_message(savewho)
-        savewho = 0
-        channelwho = 0
+        savewho = message.id
+        channelwho = message.channel.id
         await todelete.delete()
         await message.delete()
 
-    if 'who' in msg_lower.strip() and savewho == 0:
+    if 'who' in msg_lower.strip():
       savewho = message.id
       channelwho = message.channel.id
       
