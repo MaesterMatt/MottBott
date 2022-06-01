@@ -21,8 +21,8 @@ async def on_ready():
 
 juwi_last = time.time()-60
 lauren_last = time.time()-60
-savewho = {}
-channelwho = {}
+savewho = []
+channelwho = []
 @client.event
 async def on_message(message):  
     msg_lower = message.content.lower()
