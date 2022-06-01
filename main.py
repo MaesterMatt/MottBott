@@ -36,20 +36,13 @@ async def on_message(message):
     if 'who asked?' == msg_lower:
         await message.delete()
 
-    if 'nobody asked' == msg_lower:
+    if 'nobody asked' == msg_lower or 'no one asked' == msg_lower:
       await message.delete()
 
     global savewho
     global channelwho
-    if 'who' in msg_lower:
-      savewho = message.id
-      channelwho = message.channel.id
-      print(savewho)
-      print(channelwho)
 
-    if 'asked' in msg_lower:
-      print(savewho)
-      print(channelwho)
+    if 'asked' in msg_lower.strip():
       if savewho != 0 and channelwho != 0:
         todeletechannel = client.get_channel(channelwho)
         todelete = await todeletechannel.fetch_message(savewho)
@@ -57,6 +50,10 @@ async def on_message(message):
         channelwho = 0
         await todelete.delete()
         await message.delete()
+
+    if 'who' in msg_lower.strip() and savewho == 0:
+      savewho = message.id
+      channelwho = message.channel.id
       
     #darren nauseous react
     if 'darren' in msg_lower:
