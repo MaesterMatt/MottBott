@@ -53,6 +53,7 @@ async def on_message(message):
     elif 'who' in "".join(msg_lower.split()) or 'nobody' in "".join(msg_lower.split()):
       if len(savewho) > 10:
         savewho.clear()
+        channelwho.clear()
       savewho.append(message.id)
       channelwho.append(message.channel.id)
       
