@@ -74,6 +74,10 @@ async def on_message(message):
       rand_quote = mylist[random.randint(0, len(mylist)-1)]
       await message.channel.send(rand_quote)
 
+    if message.author.id == 442160756016939028 and 'get a pc lol' in msg_lower:
+      await message.channel.send('Get a mac lol')
+      await message.delete()
+
     #For Julia Nuts emoji reaction
     global juwi_last
     if message.author.id == 108011901136519168 and (time.time()-juwi_last > 120):
