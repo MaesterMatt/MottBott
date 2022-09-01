@@ -33,9 +33,9 @@ async def on_message(message):
     if client.user.mentioned_in(message):
         await message.channel.send('Hey Daddy ~')
 
-    if 'pepega' in msg_noyt:
+    if 'retard' in msg_noyt:
       channel = await message.author.create_dm()
-      await channel.send('Hi, the word Pepega has been removed from Spirit discord. This word is a common replacement for the word "Retard". This goes against the community in which we hope to build. :) Thank you for your understanding')
+      await channel.send('Hi, the word "retard" has been removed from Spirit discord. This goes against the community in which we hope to build. :) Thank you for your understanding')
       await message.delete()
       
     #who asked removal
