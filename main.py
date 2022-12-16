@@ -16,6 +16,10 @@ from datetime import datetime, timedelta
 intents = discord.Intents.default()
 intents.members = True
 intents.messages = True
+try: 
+  intents.message_content = True
+except:
+  print("Only for Replit")
 client = discord.Client(intents=intents)
 
 @client.event
@@ -117,8 +121,7 @@ async def on_message(message):
         with open('levels.csv') as csv_file:
           csv_reader = csv.reader(csv_file, delimiter='\n')
           rows = list(csv_reader)
-          rows = [row[0] for row in rows]
-          print(rows)
+          rows = [row[0] if len(row) > 0 else row for row in rows]
           await message.channel.send(rows[level-1])
         
 
@@ -296,6 +299,6 @@ async def time_check():
       time = 50
     await asyncio.sleep(time)
 
-client.loop.create_task(time_check())
+#client.loop.create_task(time_check())
 
 client.run(os.getenv('TOKEN'))
