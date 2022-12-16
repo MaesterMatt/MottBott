@@ -113,7 +113,7 @@ async def on_message(message):
       data = json.loads(req)
       level = data['level']
       # Print the data to view it
-      if level < 20:
+      if level < 201:
         with open('levels.csv') as csv_file:
           csv_reader = csv.reader(csv_file, delimiter='\n')
           rows = list(csv_reader)
