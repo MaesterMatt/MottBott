@@ -7,12 +7,15 @@ import random
 import asyncio
 import logging
 import csv
+import urllib.request
+import json
 from datetime import datetime, timedelta
 
 #client = discord.Client()
 
 intents = discord.Intents.default()
 intents.members = True
+intents.message_content = True
 client = discord.Client(intents=intents)
 
 @client.event
@@ -24,6 +27,7 @@ lauren_last = time.time()-60
 savewho = []
 @client.event
 async def on_message(message):  
+    
     msg_lower = message.content.lower()
     msg_noyt = "".join(msg_lower.split())
 
@@ -101,10 +105,25 @@ async def on_message(message):
         await message.add_reaction(emoji)
         lauren_last = time.time()
 
-    #Hau sux
-    # if 'hau' in msg_lower:
-    #   hau = bool(random.getrandbits(1))
-    #   await message.channel.send('sux' if hau else 'doesn\'t sux')
+    #Level Comment
+    if '$maple' in msg_lower:
+      charname = "".join(msg_lower[7:].split())
+      url = "https://maplelegends.com/api/character?name=" + charname
+      req = urllib.request.urlopen(url).read().decode()
+      data = json.loads(req)
+      level = data['level']
+      # Print the data to view it
+      if level < 20:
+        with open('levels.csv') as csv_file:
+          csv_reader = csv.reader(csv_file, delimiter='\n')
+          rows = list(csv_reader)
+          rows = [row[0] for row in rows]
+          print(rows)
+          await message.channel.send(rows[level-1])
+        
+
+      # page = urllib.request.urlopen('')
+      # print(page.read())
 
     mylist = ["JCJCJCJCJCJCJCJC", ".................JC!", "down >:)", "Oh sorry I'm busy", "just go w/o me idk wtf is wrong with this game", "I'm out right now", "How about in like an hour?", "Im going to dentist ...", "I WNA NAP", "I’m at hospital", "IM GETTING THE BEE OUT STILL", "It's too late for JC now, imma go to zak", "LMAO WTF IS THIS SHIT im going out ....", "LOL", "gimme like 15 mins me finishign dinner", "omg it says we are unable to connect to maplelegends"]
     if 'jc' in msg_lower:
