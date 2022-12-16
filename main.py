@@ -122,7 +122,8 @@ async def on_message(message):
           csv_reader = csv.reader(csv_file, delimiter='\n')
           rows = list(csv_reader)
           rows = [row[0] if len(row) > 0 else row for row in rows]
-          await message.channel.send(rows[level-1])
+          if len(rows[level-1] > 0)
+            await message.channel.send(rows[level-1])
         
 
       # page = urllib.request.urlopen('')
