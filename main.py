@@ -15,7 +15,7 @@ from datetime import datetime, timedelta
 
 intents = discord.Intents.default()
 intents.members = True
-intents.message_content = True
+intents.messages = True
 client = discord.Client(intents=intents)
 
 @client.event
