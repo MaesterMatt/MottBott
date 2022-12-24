@@ -124,10 +124,14 @@ async def on_message(message):
           rows = [row[0] if len(row) > 0 else row for row in rows]
           if len(rows[level-1]) > 0:
             await message.channel.send(rows[level-1])
-        
 
-      # page = urllib.request.urlopen('')
-      # print(page.read())
+     #Level Comment
+    if '$guild' in msg_lower:
+      page = "?page=" + "".join(msg_lower[7:].split())
+      url = "https://maplelegends.com/ranking/guild" + page
+      req = urllib.request.urlopen(url).read().decode()
+      print(req)
+      
 
     mylist = ["JCJCJCJCJCJCJCJC", ".................JC!", "down >:)", "Oh sorry I'm busy", "just go w/o me idk wtf is wrong with this game", "I'm out right now", "How about in like an hour?", "Im going to dentist ...", "I WNA NAP", "I’m at hospital", "IM GETTING THE BEE OUT STILL", "It's too late for JC now, imma go to zak", "LMAO WTF IS THIS SHIT im going out ....", "LOL", "gimme like 15 mins me finishign dinner", "omg it says we are unable to connect to maplelegends"]
     if 'jc' in msg_lower:
