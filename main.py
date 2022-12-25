@@ -127,10 +127,18 @@ async def on_message(message):
 
      #Level Comment
     if '$guild' in msg_lower:
-      page = "?page=" + "".join(msg_lower[7:].split())
-      url = "https://maplelegends.com/ranking/guild" + page
+      page = "".join(msg_lower[7:].split()) if len("".join(msg_lower[7:].split())) > 0 else "1"
+      url = "https://maplelegends.com/ranking/guild?page=" + page
       req = urllib.request.urlopen(url).read().decode()
-      print(req)
+      index = req.find("guild_name_link")
+      guilds = req[index:]
+      print(guilds)
+      while guilds.find("search=") > 0:
+        #print(guilds)
+        index = guilds.find("search=")
+        guilds = guilds[index+7:]
+        await message.channel.send(guilds[:guilds.find("><")-1] + " - " + guilds[guilds.find("<b>")+3:guilds.find("</b>", guilds.find("<b>"))] + "gp")
+      
       
 
     mylist = ["JCJCJCJCJCJCJCJC", ".................JC!", "down >:)", "Oh sorry I'm busy", "just go w/o me idk wtf is wrong with this game", "I'm out right now", "How about in like an hour?", "Im going to dentist ...", "I WNA NAP", "I’m at hospital", "IM GETTING THE BEE OUT STILL", "It's too late for JC now, imma go to zak", "LMAO WTF IS THIS SHIT im going out ....", "LOL", "gimme like 15 mins me finishign dinner", "omg it says we are unable to connect to maplelegends"]
