@@ -10,7 +10,7 @@ import csv
 import urllib.request
 import json
 from datetime import datetime, timedelta
-from PIL import Image, ImageDraw, ImageFont
+#from PIL import Image, ImageDraw, ImageFont
 
 #client = discord.Client()
 
