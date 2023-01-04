@@ -10,6 +10,7 @@ import csv
 import urllib.request
 import json
 from datetime import datetime, timedelta
+from PIL import Image, ImageDraw, ImageFont
 
 #client = discord.Client()
 
@@ -127,17 +128,21 @@ async def on_message(message):
 
      #Level Comment
     if '$guild' in msg_lower:
-      page = "".join(msg_lower[7:].split()) if len("".join(msg_lower[7:].split())) > 0 else "1"
-      url = "https://maplelegends.com/ranking/guild?page=" + page
-      req = urllib.request.urlopen(url).read().decode()
-      index = req.find("guild_name_link")
-      guilds = req[index:]
-      print(guilds)
-      while guilds.find("search=") > 0:
-        #print(guilds)
-        index = guilds.find("search=")
-        guilds = guilds[index+7:]
-        await message.channel.send(guilds[:guilds.find("><")-1] + " - " + guilds[guilds.find("<b>")+3:guilds.find("</b>", guilds.find("<b>"))] + "gp")
+      pagenum = "".join(msg_lower[7:].split())
+      if not pagenum.isdigit() or (int(pagenum) > 0 and int(pagenum) < 200):
+        page = pagenum if len(pagenum) > 0 else "1"
+        url = "https://maplelegends.com/ranking/guild?page=" + page
+        req = urllib.request.urlopen(url).read().decode()
+        index = req.find("guild_name_link")
+        guilds = req[index:]
+        print(guilds)
+        while guilds.find("search=") > 0:
+          #print(guilds)
+          index = guilds.find("search=")
+          guilds = guilds[index+7:]
+          await message.channel.send(guilds[:guilds.find("><")-1] + " - " + guilds[guilds.find("<b>")+3:guilds.find("</b>", guilds.find("<b>"))] + "gp")
+      else:
+        await message.channel.send("$guild <number between than 1 and 200>")
       
       
 
@@ -163,8 +168,8 @@ async def on_message(message):
       else:
         if 'eggjung gif' in msg_lower:
           suwu = 'eggjung.gif'
-        elif len(msg_lower) > 7:
-          suwu = 'eggjung/eggjung' + str(int(msg_lower[7:].strip(" \n")) - 1) + '.jpg'
+        elif len(msg_lower) > 7 and msg_lower[7:].strip(" \n").isdigit():
+            suwu = 'eggjung/eggjung' + str(int(msg_lower[7:].strip(" \n")) - 1) + '.jpg'
         else:
           sujung = random.randint(0, eggjungImageCount)
           if sujung < eggjungImageCount:
@@ -312,6 +317,6 @@ async def time_check():
       time = 50
     await asyncio.sleep(time)
 
-#client.loop.create_task(time_check())
+client.loop.create_task(time_check())
 
 client.run(os.getenv('TOKEN'))
