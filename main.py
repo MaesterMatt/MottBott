@@ -177,9 +177,10 @@ async def on_message(message):
         await message.channel.send(file=discord.File(suwu))
 
     #jguild
-    if 'jguild' == msg_lower:
+    if 'jguild' == msg_lower or ':jguild:' == msg_lower:
         await message.channel.send(file=discord.File('jguild.png'))
-        
+        await message.delete()
+      
     #mystery question
     if '?mystery' in msg_lower:
       with open('icebreakers.txt') as fr: 
