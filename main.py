@@ -67,7 +67,7 @@ async def on_message(message):
       if len(message.content) < 10:
         savewho.append([message.author.id, message.id, message.channel.id])
       #channelwho.append({message.author.id, message.channel.id})
-      
+
     #darren nauseous react
     if 'darren' in msg_lower:
         emoji = '\U0001F922'#'\N{2764}'
@@ -176,6 +176,10 @@ async def on_message(message):
             suwu = 'eggjung/eggjung' + str(sujung) + '.jpg'
         await message.channel.send(file=discord.File(suwu))
 
+    #jguild
+    if 'jguild' == msg_lower:
+        await message.channel.send(file=discord.File('jguild.png'))
+        
     #mystery question
     if '?mystery' in msg_lower:
       with open('icebreakers.txt') as fr: 
