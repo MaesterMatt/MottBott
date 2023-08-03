@@ -206,6 +206,14 @@ async def on_message(message):
           send = 'No other birthdays this month :('
           await message.channel.send(send)
           #print(f'\tIGN: {row[0]}\'s birthday is on {row[1]}, timezone is UTC + {row[2]}. Their Discord ID is: {row[3]}, and the quote assigned is: {row[4]}')
+    
+    if '?guildtest' in msg_lower:
+      ign = "nightshadow"
+      url = "https://maplelegends.com/api/character?name=" + ign
+      req = urllib.request.urlopen(url).read().decode()
+      index = req.find("guild")
+      char_guild = req[index]
+      print(char_guild)
 
     if '?birthdaytest' in msg_lower:
       message_channel = client.get_channel(860799304134426625)
@@ -254,6 +262,13 @@ async def on_message(message):
 
           await message.author.remove_roles(ghost_role)
           general = client.get_channel(495284966876512258)
+
+          # url = "https://maplelegends.com/api/character?name=" + ign
+          # req = urllib.request.urlopen(url).read().decode()
+          # index = req.find("guild")
+          # char_guild = req[index]
+          # print(char_guild)
+          
           spies_role = discord.utils.get(message.author.guild.roles, id=727473839268691968)
           await message.author.add_roles(spies_role)
           mylist = ["**Welcome to Spirit!** We're excited to see you ", "**Welcome to Spirit** BINCH... Enjoy your stay ", "**SSSUUUUUUUHHHHHHHHHHHHH** ", "SHEEEEEEEEEEEEEEEEEEEEEEEEEESH ", "Welcome to spirit! I'm ugly "]
