@@ -207,13 +207,18 @@ async def on_message(message):
           await message.channel.send(send)
           #print(f'\tIGN: {row[0]}\'s birthday is on {row[1]}, timezone is UTC + {row[2]}. Their Discord ID is: {row[3]}, and the quote assigned is: {row[4]}')
     
-    if '?guildtest' in msg_lower:
-      ign = "nightshadow"
-      url = "https://maplelegends.com/api/character?name=" + ign
+    if '?guild' in msg_lower:
+      charname = "".join(msg_lower[7:].split())
+      url = "https://maplelegends.com/api/character?name=" + charname
       req = urllib.request.urlopen(url).read().decode()
-      #index = req.find("guild")
-      
-      await message.channel.send(req["guild"])
+      data = json.loads(req)
+      guildie = data['guild']
+      if guildie == "Spirit":
+        await message.channel.send("Hi Guildie <3")
+      elif guildie == "WeenieHutJrs":
+        await message.channel.send("Hi Cutie alliance member <3")
+      else:
+        await message.channel.send("New phone, who dis?")
 
     if '?birthdaytest' in msg_lower:
       message_channel = client.get_channel(860799304134426625)
