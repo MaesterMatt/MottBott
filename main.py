@@ -268,14 +268,18 @@ async def on_message(message):
           await message.author.remove_roles(ghost_role)
           general = client.get_channel(495284966876512258)
 
-          # url = "https://maplelegends.com/api/character?name=" + ign
-          # req = urllib.request.urlopen(url).read().decode()
-          # index = req.find("guild")
-          # char_guild = req[index]
-          # print(char_guild)
+          role_assign = discord.utils.get(message.author.guild.roles, id=727473839268691968)
+
+          url = "https://maplelegends.com/api/character?name=" + ign
+          req = urllib.request.urlopen(url).read().decode()
+          data = json.loads(req)
+          guildie = data['guild']
+          if guildie == "Spirit":
+            role_assign = discord.utils.get(message.author.guild.roles, id=716080619553030144)
+          elif guildie == "WeenieHutJrs":
+            role_assign = discord.utils.get(message.author.guild.roles, id=716072714665852928)
           
-          spies_role = discord.utils.get(message.author.guild.roles, id=727473839268691968)
-          await message.author.add_roles(spies_role)
+          await message.author.add_roles(role_assign)
           mylist = ["**Welcome to Spirit!** We're excited to see you ", "**Welcome to Spirit** BINCH... Enjoy your stay ", "**SSSUUUUUUUHHHHHHHHHHHHH** ", "SHEEEEEEEEEEEEEEEEEEEEEEEEEESH ", "Welcome to spirit! I'm ugly "]
           rand_quote = mylist[random.randint(0, len(mylist)-1)]
           self_add_roles = client.get_channel(717216767222480896)
