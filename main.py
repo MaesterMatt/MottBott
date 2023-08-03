@@ -211,9 +211,9 @@ async def on_message(message):
       ign = "nightshadow"
       url = "https://maplelegends.com/api/character?name=" + ign
       req = urllib.request.urlopen(url).read().decode()
-      index = req.find("guild")
-      char_guild = req[index]
-      print(char_guild)
+      #index = req.find("guild")
+      
+      await message.channel.send(req["guild"])
 
     if '?birthdaytest' in msg_lower:
       message_channel = client.get_channel(860799304134426625)
