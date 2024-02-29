@@ -72,7 +72,7 @@ async def on_message(message):
     #nimbot text removal
     if ('katrinaa' in msg_lower or 'rattato' in msg_lower or 'iii' in msg_lower) and message.author.id == 873093667479486505:
       await message.delete()
-      await message.author.timeout(datetime.timedelta(seconds=60)
+      await message.author.timeout(datetime.timedelta(seconds=60))
       
     #poggy react
     if 'poggy' in msg_lower:
