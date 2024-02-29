@@ -72,15 +72,14 @@ async def on_message(message):
     #nimbot text removal
     if ('katrinaa' in msg_lower or 'rattato' in msg_lower or 'iii' in msg_lower) and message.author.id == 873093667479486505:
       await message.delete()
-      await message.author.timeout(datetime.timedelta(seconds=60))
+      regularmute = datetime.timedelta(seconds=60)
+      await message.author.edit(timed_out_until=regularmute)
       
     #poggy react
     if 'poggy' in msg_lower:
-      #emojis = await.fetch_emojis()
-      #await client.add_reaction(message, emoji)
-      emoji = get(client.get_all_emojis(), name='poggy')
-      await client.add_reaction(message, emoji)
-      #await message.add_reaction(emoji)
+      emoji = '<:poggy:1069696541541019648>'
+      await message.add_reaction(emoji)
+      
     #darren nauseous react
     if 'darren' in msg_lower:
         emoji = '\U0001F922'#'\N{2764}'
