@@ -77,7 +77,7 @@ async def on_message(message):
 
     #mottbott react
     if 'mottbot' in msg_lower:
-      emoji = 'U0001F345'
+      emoji = '\U0001F345'
       await message.add_reaction(emoji)
   
     #poggy react
