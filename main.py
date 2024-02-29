@@ -78,7 +78,7 @@ async def on_message(message):
     if 'poggy' in msg_lower:
       #emojis = await.fetch_emojis()
       #await client.add_reaction(message, emoji)
-      emoji = get(client.fetch_emojis(), name='poggy')
+      emoji = get(client.get_all_emojis(), name='poggy')
       await client.add_reaction(message, emoji)
       #await message.add_reaction(emoji)
     #darren nauseous react
