@@ -76,7 +76,7 @@ async def on_message(message):
       # await message.author.timeout(regularmute)
       
     #poggy react
-    if 'poggy' in msg_lower:
+    if 'poggy' in msg_lower or 'peggu' in msg_lower:
       emoji = '<:poggy:1069696541541019648>'
       await message.add_reaction(emoji)
       
