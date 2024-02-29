@@ -67,7 +67,15 @@ async def on_message(message):
       if len(message.content) < 10:
         savewho.append([message.author.id, message.id, message.channel.id])
       #channelwho.append({message.author.id, message.channel.id})
-
+    #nimbot text removal
+    if ('katrinaa' in msg_lower or 'rattato' in msg_lower or 'iii' in msg_lower) and message.author.id == 873093667479486505:
+      await message.delete()
+      
+    #poggy react
+    if 'poggy' in msg_lower:
+      emoji = get(client.get_all_emojis(), name='poggy')
+      await client.add_reaction(message, emoji)
+      #await message.add_reaction(emoji)
     #darren nauseous react
     if 'darren' in msg_lower:
         emoji = '\U0001F922'#'\N{2764}'
