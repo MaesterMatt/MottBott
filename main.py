@@ -74,7 +74,12 @@ async def on_message(message):
       await message.delete()
       # regularmute = datetime.timedelta(seconds=60)
       # await message.author.timeout(regularmute)
-      
+
+    #mottbott react
+    if 'mottbot' in msg_lower:
+      emoji = '<:pat_tomato:983832244634402896>'
+      await message.add_reaction(emoji)
+  
     #poggy react
     if 'poggy' in msg_lower or 'peggu' in msg_lower:
       emoji = '<:poggy:1069696541541019648>'
