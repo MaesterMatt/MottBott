@@ -75,6 +75,9 @@ async def on_message(message):
       # regularmute = datetime.timedelta(seconds=60)
       # await message.author.timeout(regularmute)
 
+    if 'slay' in msg_lower:
+      emoji = '\U0001F485'
+      await message.add_reaction(emoji)
     #mottbott react
     if 'mottbot' in msg_lower:
       emoji = '\U0001F345'
@@ -134,6 +137,9 @@ async def on_message(message):
       req = urllib.request.urlopen(url).read().decode()
       data = json.loads(req)
       level = data['level']
+      piggle = data['name']
+      if "piggle" in piggle:
+        await message.channel.send("VIVA LA PIGGLE!!! :pig:")
       # Print the data to view it
       if level < 201:
         with open('levels.csv') as csv_file:
