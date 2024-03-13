@@ -140,8 +140,7 @@ async def on_message(message):
       piggle = data['name']
       if "piggle" in piggle:
         await message.channel.send("VIVA LA PIGGLE!!! :pig:")
-      # Print the data to view it
-      if level < 201:
+      elif level < 201:
         with open('levels.csv') as csv_file:
           csv_reader = csv.reader(csv_file, delimiter='\n')
           rows = list(csv_reader)
