@@ -187,16 +187,23 @@ async def on_message(message):
       eggjungImageCount = len(os.listdir('eggjung/'))
       if 'eggjung count' in msg_lower:
         await message.channel.send("There are " + str(eggjungImageCount) + " eggjungs.")
+      elif 'kebabjung' in msg_lower:
+        suwu = 'morejung/kebabjung.png'
+      elif 'eggjung irl' in msg_lower:
+        suwu = 'morejung/eggjungirl.jpg'
+      elif 'alienjung' in msg_lower:
+        suwu = 'morejung/alienjung.jpg'
+      elif 'bibjung' in msg_lower:
+        suwu = 'morejung/bibbjung.jpg'
+      elif 'eggjung gif' in msg_lower:
+        suwu = 'morejung/eggjung.gif'
+      elif len(msg_lower) > 7 and msg_lower[7:].strip(" \n").isdigit():
+          suwu = 'eggjung/eggjung' + str(int(msg_lower[7:].strip(" \n")) - 1) + '.jpg'
       else:
-        if 'eggjung gif' in msg_lower:
-          suwu = 'eggjung.gif'
-        elif len(msg_lower) > 7 and msg_lower[7:].strip(" \n").isdigit():
-            suwu = 'eggjung/eggjung' + str(int(msg_lower[7:].strip(" \n")) - 1) + '.jpg'
-        else:
-          sujung = random.randint(0, eggjungImageCount)
-          if sujung < eggjungImageCount:
-            suwu = 'eggjung/eggjung' + str(sujung) + '.jpg'
-        await message.channel.send(file=discord.File(suwu))
+        sujung = random.randint(0, eggjungImageCount)
+        if sujung < eggjungImageCount:
+          suwu = 'eggjung/eggjung' + str(sujung) + '.jpg'
+      await message.channel.send(file=discord.File(suwu))
 
     #jguild
     if 'jguild' in msg_lower:
