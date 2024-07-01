@@ -182,18 +182,18 @@ async def on_message(message):
       await message.channel.send(file=discord.File('Jiaoceng.png'))
 
     #eggjung
-    if 'eggjung' in msg_lower:
+    if 'jung' in msg_lower:
       suwu = ""
       eggjungImageCount = len(os.listdir('eggjung/'))
       if 'eggjung count' in msg_lower:
         await message.channel.send("There are " + str(eggjungImageCount) + " eggjungs.")
-      elif 'eggjung kebab' in msg_lower:
+      elif 'kebabjung' in msg_lower:
         suwu = 'morejung/kebabjung.png'
       elif 'eggjung irl' in msg_lower:
         suwu = 'morejung/eggjungirl.jpg'
-      elif 'eggjung alien' in msg_lower:
+      elif 'alienjung' in msg_lower:
         suwu = 'morejung/alienjung.jpg'
-      elif 'eggjung bib' in msg_lower:
+      elif 'bibjung' in msg_lower:
         suwu = 'morejung/bibbjung.jpg'
       elif 'eggjung gif' in msg_lower:
         suwu = 'morejung/eggjung.gif'
