@@ -182,7 +182,7 @@ async def on_message(message):
       await message.channel.send(file=discord.File('Jiaoceng.png'))
 
     #eggjung
-    if 'eggjung' in msg_lower:
+    if 'jung' in msg_lower:
       suwu = ""
       eggjungImageCount = len(os.listdir('eggjung/'))
       if 'eggjung count' in msg_lower:
@@ -199,7 +199,7 @@ async def on_message(message):
         suwu = 'morejung/eggjung.gif'
       elif len(msg_lower) > 7 and msg_lower[7:].strip(" \n").isdigit():
           suwu = 'eggjung/eggjung' + str(int(msg_lower[7:].strip(" \n")) - 1) + '.jpg'
-      else:
+      elif 'eggjung' in msg_lower:
         sujung = random.randint(0, eggjungImageCount)
         if sujung < eggjungImageCount:
           suwu = 'eggjung/eggjung' + str(sujung) + '.jpg'
