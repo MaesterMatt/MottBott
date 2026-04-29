@@ -11,6 +11,7 @@ import urllib.request
 import json
 from datetime import datetime, timedelta
 from discord.utils import get
+from discord.ext import tasks, commands
 
 #from PIL import Image, ImageDraw, ImageFont
 
@@ -345,7 +346,7 @@ async def on_member_join(member):
     await member.add_roles(role)
 
 #General: 495284966876512258
-@client.event
+@tasks.loop(seconds=30.0)
 async def time_check():
   await client.wait_until_ready()
   message_channel = client.get_channel(495284966876512258)
@@ -374,6 +375,8 @@ async def time_check():
       time = 50
     await asyncio.sleep(time)
 
-client.loop.create_task(time_check())
+# @tasks.loop(seconds=5.0)
+
+# client.loop.create_task(time_check())
 
 client.run(os.getenv('TOKEN'))
